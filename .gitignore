@@ -1,0 +1,11 @@
+#ignore
+config.json
+package-lock.json
+cache
+node_modules
+logs/*
+todo.txt
+testing.js
+
+# do not ignore
+!.gitkeep
