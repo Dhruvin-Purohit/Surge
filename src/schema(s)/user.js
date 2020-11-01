@@ -16,6 +16,11 @@ const User = mongoose.Schema({
         },
         bstag: {
             type: String
+        },
+        Stage: {
+            type: Number,
+            default: 1,
+            required: true
         }
 })
 
