@@ -1,9 +1,9 @@
 module.exports = async (client) => {
   
   const activities = [
-    { name: 'Brawl Stars', type: 'PLAYING' },
-    { name: 'Clash of Clans', type: 'PLAYING' },
-    { name: 'Clash Royale', type: 'PLAYING' }
+    { name: 'Brawl Stars', type: 'COMPETING' },
+    { name: 'Clash of Clans', type: 'COMPETING' },
+    { name: 'Clash Royale', type: 'COMPETING' }
   ];
 
   // Update presence

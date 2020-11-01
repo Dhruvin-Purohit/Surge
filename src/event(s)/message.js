@@ -2,8 +2,9 @@ const { oneLine } = require('common-tags');
 const { MessageEmbed } = require('discord.js');
 const config = require('../../config.json');
 var Guild = require('../schema(s)/guild');
-const emojis = require('../utils/emojis.json')
-var User = require('../schema(s)/user')
+const emojis = require('../utils/emojis.json');
+var User = require('../schema(s)/user');
+const pics = require('../../data/pics.json');
 
 module.exports = async (client, message) => {
   if (message.channel.type === 'dm' || !message.channel.viewable || message.author.bot) return;
@@ -73,14 +74,14 @@ if (boomer.isbotbanned) return;
         .setTitle(`Yo I am Surge ${emojis.Happy}`)
         .setThumbnail(pics.Yo)
         .setDescription(`My prefix here is \`${prefix}\`\nYou can use \`${prefix}help\` command for further Guidance`)
-        .addField(`Invite Me`, oneLine`
-        You can invite me [here](${circuit.connect})
+        .addField(`${emojis.Phew}Invite Me`, oneLine`
+        You can invite me [here](${config.invite})
         `)
-        .addField(`Support Server`, oneLine`
-        Need more help? Join the [Support Server!](${circuit.support})
+        .addField(`${emojis.Special}Support Server`, oneLine`
+        Need more help? Join the [Support Server!](${config.support})
         `)
-        .addField(`Github`, oneLine`
-        My [GitHub](${circuit.github}) Repository.\n
+        .addField(`${emojis.Thonk}My Code`, oneLine`
+        My [GitHub](${config.github}) Repository has all my code.\n
         `)
         .setColor(message.guild.me.displayHexColor);
       message.channel.send(embed);
