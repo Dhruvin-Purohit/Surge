@@ -10,21 +10,21 @@ const league = require('../../utils/trophiesmap.json')
 module.exports = class BsStatsCommand extends Command {
   constructor(client) {
     super(client, {
-      name: 'bsstats',
-      aliases: ['brawlstarsstats', 'brawlstats', "bs"],
-      usage: 'bsstats <player_tag>',
+      name: 'cocstats',
+      aliases: ['clashofclansstats', "coc"],
+      usage: 'cocstats <player_tag>',
       description: oneLine`
         Sets the prefix for your server.
         Provide no prefix to set the default
       `,
       type: client.types.SETUP,
       userPermissions: ['SEND_MESSAGES'],
-      examples: ['bsstats']
+      examples: ['bsstats #0000000']
     });
   }
   async run(message, args) {
 
-    const token = config.bsapi;
+    const token = config.cocapi;
     
     let user = await User.findOne({userID: message.author.id})
 
@@ -41,7 +41,7 @@ module.exports = class BsStatsCommand extends Command {
     if (tag.startsWith('#')) tag = tag.slice(1);
 
     try {
-        const res = await fetch(`https://bsproxy.royaleapi.dev/v1/players/%23${tag}`, { headers: {'Authorization': `Bearer ${token}`}});
+        const res = await fetch(`https://cocproxy.royaleapi.dev/v1/players/%23${tag}`, { headers: {'Authorization': `Bearer ${token}`}});
         const stats = await res.json();
         if (!stats.reason) {
 
@@ -67,14 +67,14 @@ module.exports = class BsStatsCommand extends Command {
             });
 
         const embed = new MessageEmbed()
-          .setTitle(`${emojis.bs}${stats.name}'s Brawl Stars stats`)
+          .setTitle(`${emojis.coc}${stats.name}'s Clash Of Clans stats`)
           .setThumbnail(images)
           .setFooter(message.member.displayName,  message.author.displayAvatarURL({ dynamic: true }))
           .setTimestamp()//\nExperience: \`${curr}/${T}\`
-          .addField(`Profile Stats:`, `Player Tag: **\`${stats.tag}\`**\nExperience Level: ${emojis.Experience}**\`${stats.expLevel}\`**\nCurrent Trophies: ${emojis.Trophy}**\`${stats.trophies}\`**\nPower Play Points: ${emojis.PowerPlayPoints}**\`${stats.powerPlayPoints}\`**\nUnlocked Brawlers: ${emojis.Unlocked}**\`${stats.brawlers.length}\`**\n`, true)
-          .addField(`Club:`, `Club Name: **\`${stats.club.name}\`**\nClub Tag: **\`${stats.club.tag}\`**\n**Highest's**\nHighest Trophies: ${emojis.Trophy}**\`${stats.highestTrophies}\`**\nHighest in Power Play: ${emojis.PowerPlayPoints}**\`${stats.highestPowerPlayPoints}\`**`, true)
+          //.addField(`Profile Stats:`, `Player Tag: **\`${stats.tag}\`**\nExperience Level: ${emojis.Experience}**\`${stats.expLevel}\`**\nCurrent Trophies: ${emojis.Trophies}**\`${stats.trophies}\`**\nDonated: ${emojis.PowerPlayPoints}**\`${stats.donations}\`**\nRecieved: ${emojis.Unlocked}**\`${stats.donationsReceived}\`**\n`, true)
+          //.addField(`Clan:`, `Clan Name: **\`${stats.clan.name}\`**\nClub Tag: **\`${stats.clan.tag}\`**\n**Highest's**\nHighest Trophies: ${emojis.Trophies}**\`${stats.bestTrophies}\`**\nLegend Trophies: ${emojis.PowerPlayPoints}**\`${stats.legendTrophies}\`**`, true)
           .addField(`\u200B`, `\u200B`)
-          .addField(`Victories:`, `Total Victories: **\`${totalwins}\`**\nSolo Victories: ${emojis.Solo}**\`${stats.soloVictories}\`**\nDuo Victories: ${emojis.Duo}**\`${stats.duoVictories}\`**\n3vs3 Victories: ${emojis["3v3"]}**\`${stats["3vs3Victories"]}\`**\n`, true)
+          //.addField(`Victories:`, `Attack Victories: **\`${stats.attackWins}\`**\nDefense Victories: ${emojis.Solo}**\`${stats.defenseWins}\`**\nVersus Battle Victories: ${emojis.Duo}**\`${stats.versusBattleWins}\`**\n3vs3 Victories: ${emojis["3v3"]}**\`${stats["3vs3Victories"]}\`**\n`, true)
           .setColor(color);
 
         return message.channel.send(embed);
