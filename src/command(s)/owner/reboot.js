@@ -32,13 +32,3 @@ module.exports = class ServersCommand extends Command {
          }
   }
 }
-//other cmd
-//this one reload
-/*if(!args || args.size < 1) return;
-delete require.cache[require.resolve(`./${args[0]}.js`)];
-
-let embedVar = new Discord.RichEmbed()
-       .setTimestamp()
-       .setDescription(`The module \`${args[0]}\` has been reloaded`)
-       message.channel.send({embed: embedVar});
-       */

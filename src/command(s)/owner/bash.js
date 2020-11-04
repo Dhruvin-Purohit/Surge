@@ -1,6 +1,7 @@
 const Command = require('../Command.js');
 const { MessageEmbed } = require('discord.js');
 const { exec } = require('child_process')
+const emojis = require('../../utils/emojis.json')
 
 module.exports = class ServersCommand extends Command {
   constructor(client) {
@@ -26,7 +27,7 @@ module.exports = class ServersCommand extends Command {
            message.channel.send(`**Errors**\n\`\`\`bash\n${stderr}\`\`\``)
          }
          if (!stderr && !stdout) {
-           message.react('\u2611')
+           message.react(emojis.Success)
          }
        }
        })
